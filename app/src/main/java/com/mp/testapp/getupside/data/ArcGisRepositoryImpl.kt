@@ -65,7 +65,7 @@ class ArcGisRepositoryImpl(activity: Activity) : ArcGisRepository {
                 displayLocation.y,
                 attributes[NAME_KEY].toString(),
                 attributes[ADDRESS_KEY].toString(),
-                attributes[NAME_KEY].toString(),
+                attributes[PHONE_KEY].toString(),
                 attributes[DISTANCE_KEY].toString().toDouble()
         )
 

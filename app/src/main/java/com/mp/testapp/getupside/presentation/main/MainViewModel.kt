@@ -22,6 +22,7 @@ class MainViewModel(
 
     fun followVisibleFoodPoints() = visibleFoodPointsLiveData
     fun followFoodPoints() = foodPointsLiveData
+    fun followBufferedFoodPoints() = foodPointsLiveData
     fun followUserLocation() = userLocationLiveData
 
 
@@ -37,9 +38,7 @@ class MainViewModel(
         requestBufferedFoodPointsLiveData.postValue(true)
     }
 
-    fun requestRefreshFoodPoints() {
-        requestRefreshFoodPointsLiveData.postValue(true)
-    }
+
 
     private val userLocationLiveData = MediatorLiveData<CurrentLocationResult>().apply {
         addSource(locationRepository.followLastLocation()) { postValue(it) }
@@ -110,6 +109,7 @@ class MainViewModel(
             if (result is FoodPointsSearchSuccess) {
                 realmRepository.deleteAll()
                 realmRepository.createOrUpdateAll(result.points)
+                requestFoodPoints()
             }
 
             update()
